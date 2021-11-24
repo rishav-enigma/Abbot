@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package rpc;
+
+service Orders {
+    // Demonstrates a request response call
+    rpc GetOrder(GetOrderReq) returns (GetOrderResp) {}
+    // Demonstrates a server streamer call
+    rpc GetOrders(GetOrdersReq) returns (stream Order) {}
+    // Demonstrates a client streaming call
+    rpc CreateOrders(stream Order) returns (CreateOrdersResp) {}
+    // Demonstrates a bidirectional streaming call
+    rpc CreateOrdersInStream(stream Order) returns (stream Order) {}
+}
+
+message Order {
+    uint32 id = 1;
+    string number = 2;
+    float total = 3;
+}
+
+message GetOrderReq {
+    uint32 id = 1;
+}
+
+message GetOrderResp {
+    Order order = 1;
+}
+
+message GetOrdersReq {
+    string search = 1;
+    uint32 limit = 2;
+}
+
+message CreateOrdersResp {
+    repeated Order orders = 1;
+}
