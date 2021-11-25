@@ -55,5 +55,5 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#install gruf for gRPC
-gem 'gruf'
+gem "bunny", ">= 2.9.2"
+gem 'rabbitmq-service-util'
