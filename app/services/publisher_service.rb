@@ -16,7 +16,6 @@ class PublisherServices
   # persistent: true it tells RabbitMQ to save the message to disk
   def publish_message(routing_key, msg, persistent = false)
     @channel.default_exchange.publish(msg, routing_key: routing_key, persistent: persistent)
-    close_connection
   end
 
   def close_connection

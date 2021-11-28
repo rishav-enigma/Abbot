@@ -18,7 +18,7 @@ class ConsumerServices
     @channel.queue(queue_name, durable: durable)
   end
 
-  def consume_message(routing_key, msg)
+  def consume_message(queue)
     begin
       # block: true is only used to keep the main thread
       # alive. Please avoid using it in real world applications.
@@ -33,6 +33,7 @@ class ConsumerServices
     rescue Interrupt => _
       close_connection
     end
+    return false
   end
 
   def close_connection
