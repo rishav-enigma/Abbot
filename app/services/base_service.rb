@@ -2,8 +2,8 @@ class BaseService
 
   attr_accessor :connection, :channel
   # automatically_recover (boolean, default: true): when false, will disable automatic network failure recovery
-  def initialize(hostname = 'rabbit.local', port = '15462', automatically_recover = false)
-    @connection = Bunny.new(hostname: hostname, port: port, automatically_recover: automatically_recover)
+  def initialize(automatically_recover = false)
+    @connection = Bunny.new(automatically_recover: automatically_recover)
   end
 
   def start
@@ -15,7 +15,7 @@ class BaseService
   end
 
   def create_channel
-    @channel = @new_connection.create_channel
+    @channel = @connection.create_channel
   end
 
 end
