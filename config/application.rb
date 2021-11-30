@@ -19,7 +19,8 @@ module Abbot
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.autoload_paths << "#{config.root}/lib"
-    config.autoload_paths << "#{config.root}/app/rpc"
+    config.autoload_paths << "#{Rails.root}/app/services"
+    gem_dir = Gem::Specification.find_by_name("protosphere").gem_dir
+    Dir.glob("#{gem_dir}/lib/proto/**/*_services_pb.rb").each { |proto| load proto }
   end
 end

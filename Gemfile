@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #install gruf for gRPC
 gem 'gruf'
+
+gem 'protosphere', git: 'https://github.com/rishav-enigma/Protosphere.git'

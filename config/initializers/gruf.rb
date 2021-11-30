@@ -1,6 +1,7 @@
-require 'app/proto/Orders_services_pb'
+require 'gruf'
 
 Gruf.configure do |c|
+  c.default_client_host = '0.0.0.0:10542'
   c.server_binding_url = '0.0.0.0:10541'
   c.backtrace_on_error = !Rails.env.production?
   c.use_exception_message = !Rails.env.production?
@@ -12,10 +13,4 @@ Gruf.configure do |c|
 
   c.interceptors.use(Gruf::Interceptors::Instrumentation::RequestLogging::Interceptor, formatter: :logstash)
 
-  if  ENV.fetch('GRPC_AUTH_TOKENS', 'austin').to_s.present?
-    c.interceptors.use(
-      Gruf::Interceptors::Authentication::Basic,
-      credentials:  ENV.fetch('GRPC_AUTH_TOKENS', 'austin').to_s.split(',').map { |t| { password: t.strip } }
-    )
-  end
 end
