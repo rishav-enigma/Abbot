@@ -10,7 +10,7 @@ class PublisherService
 
   #Declaring a queue is idempotent - it will only be created if it doesn't exist already
   # durable: true make sures that queue will survive a RabbitMQ node restart
-  def declare_queue(queue_name = "default", durable = false)
+  def declare_queue(queue_name = "default", durable = true)
     puts "A queue with name #{queue_name} declared"
     @channel.queue(queue_name, durable: durable)
   end
