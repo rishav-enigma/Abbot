@@ -21,6 +21,13 @@ class PublisherService
     @channel.default_exchange.publish(msg, routing_key: routing_key, persistent: persistent)
   end
 
+  def request_msg(routing_key, msg, reply_to, call_id)
+    @channel.default_exchange.publish(msg.to_json,
+      routing_key: routing_key,
+      correlation_id: call_id,
+      reply_to: reply_to)
+  end
+
   def close_connection
     puts "Connections Closed"
     @new_connection.close  
